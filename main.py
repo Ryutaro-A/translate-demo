@@ -212,7 +212,7 @@ dec = Decoder(OUTPUT_DIM, DEC_EMB_DIM, ENC_HID_DIM, DEC_HID_DIM, DEC_DROPOUT, at
 
 model = Seq2Seq(enc, dec, device).to(device)
 
-model.load_state_dict(torch.load('models/gru_model_03_21_01.pth'))
+model.load_state_dict(torch.load('gru_model_03_22_02.pth'))
 
 def sentence_to_tensor(sentence):
     sentence = sp_ja.EncodeAsPieces(sentence)
@@ -248,7 +248,8 @@ def main():
     
     # テキストボックスを生成
     text = st.text_input(label='日本語を入力してください．')
-    st.write('English: ', translate_sentence(text))
+    if text != '':
+        st.write('English: ', translate_sentence(text))
 
 
 
