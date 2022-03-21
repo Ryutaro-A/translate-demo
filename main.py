@@ -227,19 +227,6 @@ def translate_sentence(input_tensor):
     return ''.join([TRG_vocab.itos[p] for p in pred_tokens]).replace('▁', ' ')
 
 
-
-'''def init_weights(m: nn.Module):
-    for name, param in m.named_parameters():
-        if 'weight' in name:
-            nn.init.normal_(param.data, mean=0, std=0.01)
-        else:
-            nn.init.constant_(param.data, 0)
-
-
-model.apply(init_weights)'''
-
-
-
 def main():
     # タイトル
     st.title('日本語→英語　翻訳デモ')
@@ -248,7 +235,8 @@ def main():
     
     # テキストボックスを生成
     text = st.text_input(label='日本語を入力してください．')
-    st.write('English: ', translate_sentence(text))
+    if text != '':
+        st.write('English: ', translate_sentence(text))
 
 
 
