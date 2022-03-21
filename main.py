@@ -224,7 +224,7 @@ def translate_sentence(input_tensor):
     with torch.no_grad():
         pred = model(input_tensor)
     pred_tokens = pred.argmax(2)[:,-1]
-    return ''.join([TRG_vocab.itos[p] for p in pred_tokens]).replace('▁', ' ')
+    return ''.join([TRG_vocab.itos[p] for p in pred_tokens]).replace('▁', ' ').replace('<eos>', ' ').replace('<unk>', ' ')
 
 
 def main():
