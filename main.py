@@ -237,7 +237,7 @@ def main():
     text = st.text_input(label='日本語を入力してください．')
     if text != '':
         text = translate_sentence(text)
-        st.text('English: ', text)
+        st.write('English: ', text)
 
 
 
