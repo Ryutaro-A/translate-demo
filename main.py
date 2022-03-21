@@ -34,7 +34,7 @@ class Encoder(nn.Module):
 
         self.embedding = nn.Embedding(input_dim, emb_dim)
 
-        self.rnn = nn.GRU(emb_dim, enc_hid_dim, bidirectional = True)
+        self.rnn1 = nn.GRU(emb_dim, enc_hid_dim, bidirectional = True)
 
         self.fc = nn.Linear(enc_hid_dim * 2, dec_hid_dim)
 
@@ -45,7 +45,7 @@ class Encoder(nn.Module):
 
         embedded = self.dropout(self.embedding(src))
 
-        outputs, hidden = self.rnn(embedded)
+        outputs, hidden = self.rnn1(embedded)
 
         hidden = torch.tanh(self.fc(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1)))
 
@@ -105,7 +105,7 @@ class Decoder(nn.Module):
 
         self.embedding = nn.Embedding(output_dim, emb_dim)
 
-        self.rnn = nn.GRU((enc_hid_dim * 2) + emb_dim, dec_hid_dim)
+        self.rnn1 = nn.GRU((enc_hid_dim * 2) + emb_dim, dec_hid_dim)
 
         self.out = nn.Linear(self.attention.attn_in + emb_dim, output_dim)
 
@@ -145,7 +145,7 @@ class Decoder(nn.Module):
 
         rnn_input = torch.cat((embedded, weighted_encoder_rep), dim = 2)
 
-        output, decoder_hidden = self.rnn(rnn_input, decoder_hidden.unsqueeze(0))
+        output, decoder_hidden = self.rnn1(rnn_input, decoder_hidden.unsqueeze(0))
 
         embedded = embedded.squeeze(0)
         output = output.squeeze(0)
