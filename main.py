@@ -236,7 +236,7 @@ def main():
     # テキストボックスを生成
     text = st.text_input(label='日本語を入力してください．')
     if text != '':
-        st.write('English: ', translate_sentence(text))
+        st.subheader('English: ', translate_sentence(text))
 
 
 
